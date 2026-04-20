@@ -34,6 +34,15 @@ variable "control-planes" {
     # memory: The memory allocation for the VM
     # ex    : 2048
     memory      = number
+    # cores: The core allocation for the VM
+    # ex    : 4
+    cores      = number
+    # bridge: The network bridge for the VM to same level with router
+    # ex    : vmbr0
+    bridge      = string
+    # storage-pool: Location of storage pool for VM
+    # ex    : local-vm
+    storage-pool      = string
   }))
 }
 
@@ -58,6 +67,15 @@ variable "workers" {
     # memory: The memory allocation for the VM
     # ex    : 2048
     memory      = number
+    # cores: The core allocation for the VM
+    # ex    : 8
+    cores      = number
+    # bridge: The network bridge for the VM to same level with router
+    # ex    : vmbr0
+    bridge      = string
+    # storage-pool: Location of storage pool for VM
+    # ex    : local-vm
+    storage-pool      = string
   }))
 }
 
