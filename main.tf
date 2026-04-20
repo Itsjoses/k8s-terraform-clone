@@ -26,7 +26,7 @@ resource "proxmox_vm_qemu" "k8s-control-planes" {
   agent       = 1
 
   # K8s Clone Configuration
-  clone      = "k8s-template-master"
+  clone      = "k8s-template"
   full_clone = true
 
   # K8s Resources
@@ -38,7 +38,7 @@ resource "proxmox_vm_qemu" "k8s-control-planes" {
   memory = each.value["memory"]
 
   os_type = "cloud-init"
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   boot = "order=scsi0;net0"
 
   # Cloud Init Configuration
@@ -93,7 +93,7 @@ resource "proxmox_vm_qemu" "k8s-workers" {
   agent       = 1
 
   # K8s Clone Configuration
-  clone      = "k8s-template-worker"
+  clone      = "k8s-template"
   full_clone = true
 
   # K8s Resources
@@ -105,7 +105,7 @@ resource "proxmox_vm_qemu" "k8s-workers" {
   memory = each.value["memory"]
 
   os_type = "cloud-init"
-  scsihw  = "virtio-scsi-pci"
+  scsihw  = "virtio-scsi-single"
   boot = "order=scsi0;net0"
 
   # Cloud Init Configuration
