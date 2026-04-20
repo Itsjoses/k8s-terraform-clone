@@ -21,7 +21,7 @@ resource "proxmox_vm_qemu" "k8s-control-planes" {
   for_each    = var.control-planes
   vmid        = each.value["vmid"]
   name        = each.value["name"]
-  desc        = each.value["desc"]
+  description = each.value["desc"]
   target_node = each.value["target_node"]
   agent       = 1
 
@@ -30,10 +30,12 @@ resource "proxmox_vm_qemu" "k8s-control-planes" {
   full_clone = true
 
   # K8s Resources
-  cores   = each.value["cores"]
-  sockets = 1
-  cpu     = "host"
-  memory  = each.value["memory"]
+  cpu {
+    cores   = each.value["cores"]
+    sockets = 1
+    type    = "host"
+  }
+  memory = each.value["memory"]
 
   os_type = "cloud-init"
   scsihw  = "virtio-scsi-pci"
@@ -50,8 +52,9 @@ resource "proxmox_vm_qemu" "k8s-control-planes" {
 
   # K8s Network Configuration
   network {
-    bridge = each.value["bridge"]
-    model  = "virtio"
+    id       = 0
+    bridge   = each.value["bridge"]
+    model    = "virtio"
     firewall = true
     # VLAN Tag
     # tag = 77
@@ -85,7 +88,7 @@ resource "proxmox_vm_qemu" "k8s-workers" {
   for_each    = var.workers
   vmid        = each.value["vmid"]
   name        = each.value["name"]
-  desc        = each.value["desc"]
+  description = each.value["desc"]
   target_node = each.value["target_node"]
   agent       = 1
 
@@ -94,10 +97,12 @@ resource "proxmox_vm_qemu" "k8s-workers" {
   full_clone = true
 
   # K8s Resources
-  cores   = each.value["cores"]
-  sockets = 1
-  cpu     = "host"
-  memory  = each.value["memory"]
+  cpu {
+    cores   = each.value["cores"]
+    sockets = 1
+    type    = "host"
+  }
+  memory = each.value["memory"]
 
   os_type = "cloud-init"
   scsihw  = "virtio-scsi-pci"
@@ -114,8 +119,9 @@ resource "proxmox_vm_qemu" "k8s-workers" {
 
   # K8s Network Configuration
   network {
-    bridge = each.value["bridge"]
-    model  = "virtio"
+    id       = 0
+    bridge   = each.value["bridge"]
+    model    = "virtio"
     firewall = true
     # tag = 77
   }

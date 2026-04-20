@@ -50,57 +50,57 @@ Example for *cluster.auto.tfvars:*
 ```
 control-planes = {
     "control-plane-1" = {
-        vmid        = '100'
-        name        = 'control-planes-1'
-        desc        = 'control-planes-1'
-        target_node = 'SERVER-1'
-        ipconfig0   = 'ip=10.35.10.20/24,gw=10.35.10.1'
+        vmid        = "100"
+        name        = "control-planes-1"
+        desc        = "control-planes-1"
+        target_node = "SERVER-1"
+        ipconfig0   = "ip=10.35.10.20/24,gw=10.35.10.1"
 	    nameserver  = "10.22.64.21, 1.1.1.1, 8.8.8.8"
         cores       = 4
         memory      = 8192
-        bridge      = 'vmbr0' 
-        storage-pool= 'pool-2'
+        bridge      = "vmbr0" 
+        storage-pool = "pool-2"
 
     }
     "control-plane-2" = {
-        vmid        = '101'
-        name        = 'control-planes-2'
-        desc        = 'control-planes-2'
-        target_node = 'SERVER-1'
-        ipconfig0   = 'ip=10.35.10.21/24,gw=10.35.10.1'
+        vmid        = "101"
+        name        = "control-planes-2"
+        desc        = "control-planes-2"
+        target_node = "SERVER-1"
+        ipconfig0   = "ip=10.35.10.21/24,gw=10.35.10.1"
 	    nameserver  = "10.22.64.21, 1.1.1.1, 8.8.8.8"
         cores       = 4
         memory      = 8192
-        bridge      = 'vmbr0' 
-        storage-pool= 'pool-2'
+        bridge      = "vmbr0" 
+        storage-pool = "pool-2"
     }
 }
 
 
 workers = {
     "worker-1" = {
-        vmid        = '102'
-        name        = 'worker-1'
-        desc        = 'worker-1'
-        target_node = 'SERVER-1'
-        ipconfig0   = 'ip=10.35.10.22/24,gw=10.35.10.1'
+        vmid        = "102"
+        name        = "worker-1"
+        desc        = "worker-1"
+        target_node = "SERVER-1"
+        ipconfig0   = "ip=10.35.10.22/24,gw=10.35.10.1"
 	    nameserver  = "10.22.64.21, 1.1.1.1, 8.8.8.8"
         cores       = 4
         memory      = 8192
-        bridge      = 'vmbr0' 
-        storage-pool= 'pool-2'
+        bridge      = "vmbr0" 
+        storage-pool = "pool-2"
     }
     "worker-2" = {
-        vmid        = '103'
-        name        = 'worker-2'
-        desc        = 'worker-2'
-        target_node = 'SERVER-1'
-        ipconfig0   = 'ip=10.35.10.23/24,gw=10.35.10.1'
+        vmid        = "103"
+        name        = "worker-2"
+        desc        = "worker-2"
+        target_node = "SERVER-1"
+        ipconfig0   = "ip=10.35.10.23/24,gw=10.35.10.1"
 	    nameserver  = "10.22.64.21, 1.1.1.1, 8.8.8.8"
         cores       = 4
         memory      = 8192
-        bridge      = 'vmbr0' 
-        storage-pool= 'pool-2'
+        bridge      = "vmbr0" 
+        storage-pool = "pool-2"
     }
 }
 ```
