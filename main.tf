@@ -16,6 +16,73 @@ provider "proxmox" {
 }
 
 
+resource "proxmox_vm_qemu" "others" {
+  # K8s Informations
+  for_each    = var.others
+  vmid        = each.value["vmid"]
+  name        = each.value["name"]
+  description = each.value["desc"]
+  target_node = each.value["target_node"]
+  agent       = 1
+
+  # K8s Clone Configuration
+  clone      = "k8s-template"
+  full_clone = true
+
+  # K8s Resources
+  cpu {
+    cores   = each.value["cores"]
+    sockets = 1
+    type    = "host"
+  }
+  memory = each.value["memory"]
+
+  os_type = "cloud-init"
+  scsihw  = "virtio-scsi-single"
+  boot = "order=scsi0;net0"
+
+  # Cloud Init Configuration
+  ipconfig0  = each.value["ipconfig0"]
+  ciuser     = var.ciuser
+  cipassword = var.cipassword
+  sshkeys = var.sshkeys
+
+  # K8s SSH Configuration
+  ssh_user = var.ciuser
+
+  # K8s Network Configuration
+  network {
+    id       = 0
+    bridge   = each.value["bridge"]
+    model    = "virtio"
+    firewall = true
+    # VLAN Tag
+    # tag = 77
+  }
+
+  # K8s Disk Configuration
+  disks {
+    ide {
+      ide2 {
+	# Drive for cloud-init configuration
+        cloudinit {
+          storage = each.value["storage-pool"]
+        }
+      }
+    }
+    scsi {
+      scsi0 {
+	# Drive for booting OS
+        disk {
+          storage = each.value["storage-pool"]
+          size = "50G"
+        }
+      }
+    }
+  }
+}
+
+
 resource "proxmox_vm_qemu" "k8s-control-planes" {
   # K8s Informations
   for_each    = var.control-planes

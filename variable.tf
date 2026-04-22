@@ -13,6 +13,40 @@
 # }
 
 
+
+# Define The Control Plane/Master Nodes and IP address
+variable "others" {
+  type = map(object({
+    # vmid: The VM ID Number
+    # ex  : '100'
+    vmid        = string
+    # name: The VM Name. ex: bootstrap
+    # ex  : 'bootstrap' 
+    name        = string
+    # desc: VM Description
+    # ex  : 'master-node-X for XYZ cluster'
+    desc        = string
+    # target_node: The destination of the VM 
+    target_node = string
+    # ipconfig0: state the ip address and gateway
+    # format: 'ip=XX.XX.XX.XX/SUBNET,gw=XX.XX.XX.XX;'
+    # ex    : 'ip=10.35.10.20/24,gw=10.35.10.1'
+    ipconfig0   = string
+    # memory: The memory allocation for the VM
+    # ex    : 2048
+    memory      = number
+    # cores: The core allocation for the VM
+    # ex    : 4
+    cores      = number
+    # bridge: The network bridge for the VM to same level with router
+    # ex    : vmbr0
+    bridge      = string
+    # storage-pool: Location of storage pool for VM
+    # ex    : local-vm
+    storage-pool      = string
+  }))
+}
+
 # Define The Control Plane/Master Nodes and IP address
 variable "control-planes" {
   type = map(object({
