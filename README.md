@@ -48,6 +48,9 @@ sshkeys = "(secrets)"
 Example for *cluster.auto.tfvars:*
 
 ```
+# add any vm that u like
+others = {}
+
 control-planes = {
     "control-plane-1" = {
         vmid        = "100"
